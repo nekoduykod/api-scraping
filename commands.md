@@ -2,7 +2,7 @@
 В Extensions, завантажуй SQLite 
 В мене python 3.10.
 
-git pull
+git clone https://github.com/nekoduykod/api_data_marts.git
 
 У Powershell:
 python -m venv venv
@@ -10,13 +10,8 @@ venv\Scripts\activate
 
 pip install -r requirements.txt
 
-cd scripts
-
 python 1_installs_end.py
 python 3_orders_end.py
-
-cd .. (повертає до попередньої dir)
-
 ____________
 cntr shift + P / type sqlite / клікни Open Database (зявиться у лівому куті внизу)
 ____________
