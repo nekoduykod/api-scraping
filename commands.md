@@ -10,7 +10,11 @@ venv\Scripts\activate
 
 pip install -r requirements.txt
 
-python 1_installs_end.py
+
+python not_bad_installs.py
+
+python 1_installs_end.py   
+
 python 3_orders_end.py
 ____________
 cntr shift + P / type sqlite / клікни Open Database (зявиться у лівому куті внизу)
