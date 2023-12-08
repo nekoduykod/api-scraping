@@ -15,7 +15,7 @@ url = "https://us-central1-passion-fbe7a.cloudfunctions.net/dzn54vzyt5ga/install
 
 installs_params = {"date": previous_dates_str}
 
-headers = {"Authorization": "***_0cRdtmCdCu9XFkFNs45dpTw3NhQ7ysIwYIn8EEZzpal1uUWdkR0TXgGkY0SXfehCy-4rUZh81Hr3PaZckxyJp3VIcgBzk8qGEpZRMD8_KBJukbtVYkaobYX7jMv4f2TA0kbXkCADTM2yCJw=="}
+headers = {"Authorization": "****_0cRdtmCdCu9XFkFNs45dpTw3NhQ7ysIwYIn8EEZzpal1uUWdkR0TXgGkY0SXfehCy-4rUZh81Hr3PaZckxyJp3VIcgBzk8qGEpZRMD8_KBJukbtVYkaobYX7jMv4f2TA0kbXkCADTM2yCJw=="}
 
 with sqlite3.connect('data_marts.db') as conn:
     data_frames = []
