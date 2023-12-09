@@ -42,29 +42,39 @@ try:
                 flag VARCHAR(255),
                 name VARCHAR(255),
                 numeric VARCHAR(255),
-                official_name VARCHAR(255)
-            );
+                official_name VARCHAR(255),
+
+                CONSTRAINT unique_install_marketing_id UNIQUE (install_time, marketing_id)
+            );    
         '''
-        cursor.execute(create_table_query)
+        cursor.execute(create_table_query)        
         
         response = requests.get(url, params=installs_params, headers=headers)
-        data = response.text.replace('\\', '').replace('}]"}', '}]').replace('{"count":648,"records":"', '').replace('/', '')
-        # print(data[:1000])
+        data = response.text.replace('\\', '').replace('}]"}', '}]').replace('/', '')
+
+        prefix = '{"count":'      # "count" - динамічний, .replace('{"count":648,"records":"', '') була помилка.  
+        count_start = data.find(prefix)
+        count_end = data.find(',"records":"') + len(',"records":"')  
+        characters_to_strip = count_end - count_start
+        data = data[characters_to_strip:]
+        # print(data)
+
         records = json.loads(data)
-        for record in records:
-            insert_query = '''
+        for record in records:             
+            insert_query = ''' 
                 INSERT INTO installs_mart VALUES (
-                    %(install_time)s, %(marketing_id)s, %(channel)s, %(medium)s,
+                    %(install_time)s, %(marketing_id)s, %(channel)s, %(medium)s,    
                     %(campaign)s, %(keyword)s, %(ad_content)s, %(ad_group)s,
                     %(landing_page)s, %(sex)s, %(alpha_2)s, %(alpha_3)s,
                     %(flag)s, %(name)s, %(numeric)s, %(official_name)s
-                );
+                )
+                ON CONFLICT (install_time, marketing_id) DO NOTHING;
                 '''
             cursor.execute(insert_query, record)
     conn.commit()
     print('Loaded successfully to PostgreSQL.')
 
-    csv_filename = 'installs_data.csv'
+    csv_filename = 'installs_ddddata.csv'
     with open(csv_filename, 'w', newline='', encoding='utf-8') as csv_file:
         csv_writer = csv.DictWriter(csv_file, fieldnames=records[0].keys())
         csv_writer.writeheader()
