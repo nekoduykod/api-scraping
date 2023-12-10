@@ -10,10 +10,9 @@ def parse_response(response):
     # # Ensure the last object is enclosed in curly braces
     # last_object_index = data.rfind('}}')
     # if last_object_index != -1:
-    #     data = data[:last_object_index + 2]  # Include the last curly brace
+    #     data = data[:last_object_index + 2]  
     return data
   
-
 current_date = date.today()
 previous_dates = current_date - timedelta(days=3)
 previous_dates_str = previous_dates.strftime("%Y-%m-%d")

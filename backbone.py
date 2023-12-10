@@ -13,13 +13,13 @@ import psycopg2
 # }
 
 current_date = date.today()
-previous_dates = current_date - timedelta(days=2)
-previous_dates_str = previous_dates.strftime("%Y-%m-%d")
+previous_date = current_date - timedelta(days=1)
+previous_date_str = previous_date.strftime("%Y-%m-%d")
 
 url = "https://us-central1-passion-fbe7a.cloudfunctions.net/dzn54vzyt5ga/installs"
-installs_params = {"date": previous_dates_str}
+installs_params = {"date": previous_date_str}
 
-headers = {"Authorization": "***_***pTw3NhQ7ysIwYIn8EEZzpal1uUWdkR0TXgGkY0SXfehCy-4rUZh81Hr3PaZckxyJp3VIcgBzk8qGEpZRMD8_KBJukbtVYkaobYX7jMv4f2TA0kbXkCADTM2yCJw=="}
+headers = {"Authorization": " ** "}
 
 response = requests.get(url, params=installs_params, headers=headers)
 # print("Status Code:", response.status_code)
@@ -29,19 +29,14 @@ data = response.text.replace('\\', '').replace('}]"}', '}]').replace('{"count":6
 # content_type = response.headers.get('Content-Type', '')
 print(data)
 
-
-
-
-
-
+  
 # conn = psycopg2.connect(**db_params)
 
 
 # with open('installs.json', 'w') as f:
 #    json.dump(data, f)
  
-
-
+ 
 # if response.status_code == 200:
 #     data = response.json()
 #     csv_file_path = "01_installs_data.csv"
@@ -59,10 +54,7 @@ print(data)
 # else:
 #     print(f"Error: {response.status_code}")
 #     print(response.text)
-
-
-
-
+  
 # print("Response Content:")
 # print("Content Type:", response.headers.get('Content-Type'))
  
