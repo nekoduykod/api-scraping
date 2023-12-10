@@ -26,6 +26,8 @@ engine = create_engine('postgresql://postgres:123@localhost:5432/api_db')
 df.to_sql("orders_mart", engine, if_exists='append', index=False)
 print('Orders written to DB')
 
+
+
 # TO DO self-desctuction of the csv file.
 # TO DO cron
 

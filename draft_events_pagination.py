@@ -37,4 +37,4 @@ while True:
 
     except requests.exceptions.JSONDecodeError:
         print("Failed to decode JSON. Response might not be in valid JSON format.")
-        break
+        break 
