@@ -1,30 +1,50 @@
 import requests
 from datetime import date, timedelta
-from sqlalchemy import create_engine
 import pandas as pd
 from io import StringIO
-from urllib.parse import quote
+from sqlalchemy import create_engine
 
 current_date = date.today()
-previous_dates = current_date - timedelta(days=2)
+previous_dates = current_date - timedelta(days=3)
 previous_dates_str = previous_dates.strftime("%Y-%m-%d")
 
 url = "https://us-central1-passion-fbe7a.cloudfunctions.net/dzn54vzyt5ga/events"
-headers = {"Authorization": "***_0cRdtmCdCu9XFkFNs45dpTw3NhQ7ysIwYIn8EEZzpal1uUWdkR0TXgGkY0SXfehCy-4rUZh81Hr3PaZckxyJp3VIcgBzk8qGEpZRMD8_KBJukbtVYkaobYX7jMv4f2TA0kbXkCADTM2yCJw=="}
-
+headers = {"Authorization": "gAAAAABlcEioZ8CObY_0cRdtmCdCu9XFkFNs45dpTw3NhQ7ysIwYIn8EEZzpal1uUWdkR0TXgGkY0SXfehCy-4rUZh81Hr3PaZckxyJp3VIcgBzk8qGEpZRMD8_KBJukbtVYkaobYX7jMv4f2TA0kbXkCADTM2yCJw=="}
 events_params = {"date": previous_dates_str}
  
 response = requests.get(url, params=events_params, headers=headers)
-data = response.text.replace('\\', '') 
-print(data)
+data = response.text.replace('\\', '').replace('{"data":"', '').replace('}}]",', '}}]')
+
+next_page_index = data.find('"next_page"')
+data = data[:next_page_index]
+# print(data)
+
+df = pd.read_json(StringIO(data))
+df.to_csv('events_data.csv', index=False)
+print('Events written to CSV')
+
+df = pd.read_csv('events_data.csv')
+engine = create_engine('postgresql://postgres:123@localhost:5432/api_db')
+df.to_sql("events_mart", engine, if_exists='append', index=False)
+print('Events written to DB')
 
 
-# df = pd.read_csv(StringIO(data))
-# engine = create_engine('postgresql://postgres:123@localhost:5432/api_db')
-# df.to_sql('costs_mart', engine, if_exists='append', index=False)
-# print(f'Data loaded to costs_mart in PostgreSQL')
+''' Just efforts to investigate a pagination process. Check draft_events_pagination.py '''
+# from urllib.parse import quote
+# next_page_token = data.get('next_page')
+# while next_page_token in data:
+#     response = requests.get(url, params=events_params, headers=headers)
+#     next_page_url = f"{url}?next_page={quote(next_page_token)}"
+#     next_response = requests.get(next_page_url, headers=headers)
+#     next_data = next_response.json()
+#     print(next_data)
+# else:
+#     print("No more pages available.")
 
-# df = pd.read_csv(StringIO(data))
-# df.to_csv('costs_data.csv', index=False)
-# print('CSV file created') 
- 
+
+# if 'next_page' in data:
+#     next_page_url = data['next_page']
+#     events_params = {"next_page": next_page_url}
+#     next_page_response = requests.get(url, params=events_params, headers=headers)
+#     next_page_data = next_page_response.json()
+#     print(next_page_data)

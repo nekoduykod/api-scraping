@@ -4,14 +4,6 @@ import csv
 import json
 import psycopg2
 
-db_params = {
-    'dbname': 'api_db',
-    'user': 'postgres',
-    'password': '123',
-    'host': 'localhost',
-    'port': '5432'
-}
-
 current_date = date.today()
 previous_dates = current_date - timedelta(days=2)
 previous_dates_str = previous_dates.strftime("%Y-%m-%d")
@@ -19,7 +11,15 @@ previous_dates_str = previous_dates.strftime("%Y-%m-%d")
 url = "https://us-central1-passion-fbe7a.cloudfunctions.net/dzn54vzyt5ga/installs"
 installs_params = {"date": previous_dates_str}
 
-headers = {"Authorization": "***_0cRdtmCdCu9XFkFNs45dpTw3NhQ7ysIwYIn8EEZzpal1uUWdkR0TXgGkY0SXfehCy-4rUZh81Hr3PaZckxyJp3VIcgBzk8qGEpZRMD8_KBJukbtVYkaobYX7jMv4f2TA0kbXkCADTM2yCJw=="}
+headers = {"Authorization": "***_***pTw3NhQ7ysIwYIn8EEZzpal1uUWdkR0TXgGkY0SXfehCy-4rUZh81Hr3PaZckxyJp3VIcgBzk8qGEpZRMD8_KBJukbtVYkaobYX7jMv4f2TA0kbXkCADTM2yCJw=="}
+
+db_params = {
+    'dbname': 'api_db',
+    'user': 'postgres',
+    'password': '123',
+    'host': 'localhost',
+    'port': '5432'
+}
 
 conn = psycopg2.connect(**db_params)
  
@@ -52,7 +52,7 @@ try:
         response = requests.get(url, params=installs_params, headers=headers)
         data = response.text.replace('\\', '').replace('}]"}', '}]').replace('/', '')
 
-        prefix = '{"count":'      # "count" - динамічний, .replace('{"count":648,"records":"', '') була помилка.  
+        prefix = '{"count":'      # "count" - динамічний; Тому .replace('{"count":648,"records":"', '') не підходило
         count_start = data.find(prefix)
         count_end = data.find(',"records":"') + len(',"records":"')  
         characters_to_strip = count_end - count_start
@@ -72,14 +72,14 @@ try:
                 '''
             cursor.execute(insert_query, record)
     conn.commit()
-    print('Loaded successfully to PostgreSQL.')
+    print('Installs successfully loaded to DB')
 
-    csv_filename = 'installs_ddddata.csv'
+    csv_filename = 'installs_data.csv'
     with open(csv_filename, 'w', newline='', encoding='utf-8') as csv_file:
         csv_writer = csv.DictWriter(csv_file, fieldnames=records[0].keys())
         csv_writer.writeheader()
         csv_writer.writerows(records)
-    print('Data written to CSV:', csv_filename)
+    print('Installs CSV created', csv_filename)
 
 finally:
     conn.close()

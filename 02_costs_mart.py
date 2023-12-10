@@ -24,9 +24,9 @@ data = response.text.replace('\t', ',').replace('/home', 'home').replace('/sale'
 df = pd.read_csv(StringIO(data))
 engine = create_engine('postgresql://postgres:123@localhost:5432/api_db')
 df.to_sql('costs_mart', engine, if_exists='append', index=False)
-print(f'Data loaded to costs_mart in PostgreSQL')
+print(f'Costs loaded to DB')
 
 df = pd.read_csv(StringIO(data))
 df.to_csv('costs_data.csv', index=False)
-print('CSV file created') 
+print('Costs CSV file created') 
  

@@ -23,55 +23,42 @@ costs_params = {"date": previous_dates_str, "dimensions": "location,channel,medi
 orders_params = {"date": previous_dates_str}
 events_params = {"date": previous_dates_str}
 
-headers = {"Authorization": "***_0cRdtmCdCu9XFkFNs45dpTw3NhQ7ysIwYIn8EEZzpal1uUWdkR0TXgGkY0SXfehCy-4rUZh81Hr3PaZckxyJp3VIcgBzk8qGEpZRMD8_KBJukbtVYkaobYX7jMv4f2TA0kbXkCADTM2yCJw=="}
+headers = {"Authorization": " *** "}
 
 with sqlite3.connect('data_mart.db') as conn:
     data_frames = []
-
     for url, params in [(installs_url, installs_params), (costs_url, costs_params),
                         (orders_url, orders_params), (events_url, events_params)]:
         try:
-            print("URL:", url)
-            print("Params:", params)
-
             response = requests.get(url, params=params, headers=headers)
-            print("Status Code:", response.status_code)
 
             try:
-                # Attempt to decode using utf-8
                 content = response.content.decode('utf-8')
+
             except UnicodeDecodeError:
-                # If decoding with utf-8 fails, try another encoding
                 content = response.content.decode('ISO-8859-1')
-
-            # Use codecs to handle Unicode escape sequences
             cleaned_content = codecs.decode(content, 'unicode_escape')
-
             print("Response Content:", cleaned_content)
             print("Content Type:", response.headers.get('Content-Type'))
             response.raise_for_status()
 
             if cleaned_content and response.headers['Content-Type'] == 'application/json':
                 data = json.loads(cleaned_content)
+
                 if not data or 'data' not in data:
                     print(f"No data received from {url}.")
                     continue
-
                 df = pd.json_normalize(data['data'])
                 data_frames.append(df)
-
+                
                 while 'next_page' in data:
                     response = requests.get(url, params=params, headers=headers)
                     response.raise_for_status()
 
                     try:
-                        # Attempt to decode using utf-8
                         content = response.content.decode('utf-8')
                     except UnicodeDecodeError:
-                        # If decoding with utf-8 fails, try another encoding
                         content = response.content.decode('ISO-8859-1')
-
-                    # Use codecs to handle Unicode escape sequences
                     cleaned_content = codecs.decode(content, 'unicode_escape')
 
                     if cleaned_content and response.headers['Content-Type'] == 'application/json':
