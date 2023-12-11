@@ -1,0 +1,7 @@
+event_time,transaction_id,type,origin_transaction_id,category,payment_method,fee,tax,iap_item.name,iap_item.price,discount.code,discount.amount
+2023-12-10 04:54:39.280,kh*******Hf67n,,,Feature Unlock,In-app Purchase,0.05,0.35,500 Gold Coins,0.99,,0.0
+2023-12-10 05:22:53.457,bxk******0DAvdJg,,,Power-ups,Direct Card,0.3,0.35,Ad-Free Experience,3.99,VIP15,0.15
+2023-12-10 05:23:30.365,Uap*****dH7,,,Virtual Currency,Direct Card,0.1,0.3,Super Power Boost,2.99,,0.0
+2023-12-10 05:39:55.109,U7a****8xu,,,Skins,Gift Card,0.1,0.3,500 Gold Coins,0.99,,0.0
+etc...
+# I deleted data

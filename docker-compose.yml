@@ -34,7 +34,7 @@ services:
   
   airflow:
     container_name: airflow
-    image: apache/airflow:2.1.2
+    image: apache/airflow:2.2.3   
     restart: always 
     environment:
       - AIRFLOW_DATABASE_URL=postgresql+psycopg2://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}

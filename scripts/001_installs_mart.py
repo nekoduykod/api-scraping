@@ -75,5 +75,3 @@ with open(csv_filename, 'w', newline='', encoding='utf-8') as csv_file:
     csv_writer.writeheader()
     csv_writer.writerows(records)
 print('Installs CSV file created')
-
- 

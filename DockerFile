@@ -3,11 +3,11 @@ FROM python:3.10-slim
 WORKDIR /app
 
 ADD . /app
- 
+
 RUN pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
  
-# CMD ["python", "./01_installs_mart.py", \
-#      "python", "./02_costs_mart.py", \
-#      "python", "./03_orders_mart.py", \
-#      "python", "./04_events_mart.py"]
+# CMD ["python", "./001_installs_mart.py", \
+#      "python", "./002_costs_mart.py", \
+#      "python", "./003_orders_mart.py", \
+#      "python", "./004_events_mart.py"]

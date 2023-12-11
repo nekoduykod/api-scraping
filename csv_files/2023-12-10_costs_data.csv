@@ -1,0 +1,9 @@
+location,keyword,landing_page,medium,ad_content,campaign,channel,ad_group,cost
+AT,,home,cpc,,SignUpBonus,Google,,0.01
+AT,,home,cpc,,SpecialOffer,Referral,NewReleases,0.09
+AT,,home,display,banner2,Launch,Email,,4.2
+AT,,home,organic,,EasterSpecial,Email,,3.38
+AT,,new-arrivals,cpc,,EasterSpecial,Instagram,Group2,0.0
+AT,,sale,social,,EasterSpecial,Referral,Discounts,0.06
+etc...
+# I deleted data

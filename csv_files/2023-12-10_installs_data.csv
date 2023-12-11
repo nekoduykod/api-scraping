@@ -1,0 +1,8 @@
+install_time,marketing_id,channel,medium,campaign,keyword,ad_content,ad_group,landing_page,sex,alpha_2,alpha_3,flag,name,numeric,official_name
+2023-12-10T00:01:23.446000,ak******4jR,Instagram,cpc,EasterSpecial,None,None,Group2,new-arrivals,female,AT,AUT,ud8*********f9,Austria,040,Republic of Austria
+2023-12-10T00:02:17.624000,aB*****oUw,Organic Search,organic,EasterSpecial,None,video-ad,Discounts,Undefined,male,AT,AUT,ud8***uddf9,Austria,040,Republic of Austria
+2023-12-10T00:02:55.889000,as****Ttl,Email,email,SpringSale,None,None,None,Undefined,female,AT,AUT,ud83cud***df9,Austria,040,Republic of Austria
+2023-12-10T00:05:14.229000,aG*****dIl,Google,cpc,SignUpBonus,None,None,None,home,male,AT,AUT,ud8*****ddf9,Austria,040,Republic of Austria
+2023-12-10T00:08:28.268000,aYX***AUU1,Facebook,cpc,SpecialOffer,None,sidebar-ad,None,Undefined,male,AT,AUT,ud8****uddf9,Austria,040,Republic of Austria
+etc...
+# I deleted data
