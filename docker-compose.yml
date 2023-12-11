@@ -31,3 +31,16 @@ services:
       - .:/app
     environment:
       - PYTHONUNBUFFERED=1
+  
+  airflow:
+    container_name: airflow
+    image: apache/airflow:2.1.2
+    restart: always
+    environment:
+      - AIRFLOW_DATABASE_URL=postgresql+psycopg2://${DB_USER}:${DB_PASSWORD}@db:5432/${DB_NAME}
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+    depends_on:
+      - scripts
