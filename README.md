@@ -4,11 +4,11 @@ Daily data extraction from four sources of an API, its cleaning, transforming an
 
 <img src="/images/overview_image.jpg" />
 
-## Data Marts ERD (Entity-Relationship Diagram)
+## Data Marts ERD (entity-relationship diagram)
 
 <img src="/images/data_marts_ERD.jpg" />
 
-- Screenshots of scripts` success below
+## Screenshots of scripts` success below
 
 <img src="/images/01_installs_mart.jpg" />
 
