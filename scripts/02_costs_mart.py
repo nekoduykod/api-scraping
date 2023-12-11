@@ -29,7 +29,8 @@ df = pd.read_csv(StringIO(data))
 df.to_sql('costs_mart', engine, if_exists='append', index=False)
 print(f'Costs data loaded to DB')
 
-csv_filename = f'{previous_date_str}_costs_data.csv'
+csv_folder = os.environ.get("CSV_FOLDER")  
+csv_filename = f'{csv_folder}\\{previous_date_str}_costs_data.csv'
 df = pd.read_csv(StringIO(data))
 df.to_csv(csv_filename, index=False)
 print('Costs CSV file created') 

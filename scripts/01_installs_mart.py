@@ -18,7 +18,7 @@ auth_header = os.environ.get("MY_AUTH_HEADER")
 headers = {"Authorization": auth_header}
 installs_params = {"date": previous_date_str}
  
-db_params = os.environ.get('DB_URL')
+db_params = os.environ.get("DB_URL")
 engine = create_engine(db_params)
 
 with engine.connect() as conn:
@@ -68,8 +68,8 @@ with engine.connect() as conn:
        conn.commit()   
 print('Installs data has been loaded to DB')
 
-folder_path = 'D:\\PROJECTS\\api_data_marts\\csv_files'
-csv_filename = f'{folder_path}\\{previous_date_str}_installs_data.csv'
+csv_folder = os.environ.get("CSV_FOLDER")  
+csv_filename = f'{csv_folder}\\{previous_date_str}_installs_data.csv'
 with open(csv_filename, 'w', newline='', encoding='utf-8') as csv_file:
     csv_writer = csv.DictWriter(csv_file, fieldnames=records[0].keys())
     csv_writer.writeheader()

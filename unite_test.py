@@ -18,7 +18,7 @@ url = os.environ.get("API_URL")
 auth_header = os.environ.get("MY_AUTH_HEADER")
 headers = {"Authorization": auth_header}
 
-db_params = os.environ.get('DB_URL')
+db_params = os.environ.get("DB_URL")
 engine = create_engine(db_params)   # error - sqlalchemy.exc.ResourceClosedError: This Connection is closed
 
 with engine.connect() as conn:

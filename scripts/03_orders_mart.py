@@ -8,7 +8,7 @@ from sqlalchemy import create_engine
 load_dotenv()
 
 current_date = date.today()
-previous_date = current_date - timedelta(days=2)
+previous_date = current_date - timedelta(days=1)
 previous_date_str = previous_date.strftime("%Y-%m-%d")
 
 url = os.environ.get("API_URL")
@@ -19,12 +19,14 @@ orders_params = {"date": previous_date_str}
 
 response = requests.get(url, params=orders_params, headers=headers)
 
-parquet_filename = f'{previous_date_str}_orders_data.parquet'
+parquet_folder = os.environ.get("PARQUET_FOLDER")
+parquet_filename = f'{parquet_folder}\\{previous_date_str}_orders_data.parquet'
 with open(parquet_filename, 'wb') as file:
     file.write(response.content) 
 print('Data written to parquet')
 
-csv_filename = f'{previous_date_str}_orders_data.csv'
+csv_folder = os.environ.get("CSV_FOLDER") 
+csv_filename = f'{csv_folder}\\{previous_date_str}_orders_data.csv'
 df = pd.read_parquet(parquet_filename, engine='fastparquet')
 df.to_csv(csv_filename, index=False)
 print('Orders CSV file created')

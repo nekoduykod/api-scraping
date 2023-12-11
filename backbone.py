@@ -1,8 +1,5 @@
 import requests
-from datetime import date, timedelta
-import csv
-import json
-import psycopg2
+from datetime import date, timedelta 
 
 # db_params = {
 #     'dbname': 'api_db',
@@ -19,7 +16,7 @@ previous_date_str = previous_date.strftime("%Y-%m-%d")
 url = "https://us-central1-passion-fbe7a.cloudfunctions.net/dzn54vzyt5ga/installs"
 installs_params = {"date": previous_date_str}
 
-headers = {"Authorization": " ** "}
+headers = {"Authorization": " *** "}
 
 response = requests.get(url, params=installs_params, headers=headers)
 # print("Status Code:", response.status_code)
@@ -29,31 +26,10 @@ data = response.text.replace('\\', '').replace('}]"}', '}]').replace('{"count":6
 # content_type = response.headers.get('Content-Type', '')
 print(data)
 
-  
-# conn = psycopg2.connect(**db_params)
-
-
-# with open('installs.json', 'w') as f:
-#    json.dump(data, f)
- 
- 
-# if response.status_code == 200:
-#     data = response.json()
-#     csv_file_path = "01_installs_data.csv"
-#     with open(csv_file_path, mode='w', newline='') as csv_file:
-#         writer = csv.writer(csv_file)
-
-#         # Write header
-#         writer.writerow(data[0].keys())
-
-#         # Write data
-#         for row in data:
-#             writer.writerow(row.values())
-
-#     print(f"Data has been saved to {csv_file_path}")
-# else:
-#     print(f"Error: {response.status_code}")
-#     print(response.text)
+    
+# print(f"Data has been saved to {csv_file_path}") 
+# print(f"Error: {response.status_code}")
+# print(response.text)
   
 # print("Response Content:")
 # print("Content Type:", response.headers.get('Content-Type'))

@@ -1,15 +1,10 @@
-Створи Folder на ПК і відкрий в VS Code його
-Python 3.10
-
-git clone https://github.com/nekoduykod/api_data_marts.git
-
-Powershell terminal:
-python -m venv venv
-venv\Scripts\activate   
-
 pip install -r requirements.txt
+pip install poetry requests sqlalchemy pandas apache-airflow-providers-docker load_dotenv
 
-python 01_installs_mart.py
-python 02_costs_mart.py   
-python 03_orders_mart.py
-python 04_events_mart.py
+docker-compose build 
+docker-compose up -d
+
+docker-compose logs
+docker-compose ps
+
+docker-compose down

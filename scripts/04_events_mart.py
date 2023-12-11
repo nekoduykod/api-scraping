@@ -23,7 +23,8 @@ data = response.text.replace('\\', '').replace('{"data":"', '').replace('}}]",',
 next_page_index = data.find('"next_page"')
 data = data[:next_page_index]
 
-csv_filename = f'{previous_date_str}_events_data.csv'
+csv_folder = os.environ.get("CSV_FOLDER")  
+csv_filename = f'{csv_folder}\\{previous_date_str}_events_data.csv'
 df = pd.read_json(StringIO(data))
 df.to_csv(csv_filename, index=False)
 print('Events written to CSV')

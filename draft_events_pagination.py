@@ -18,7 +18,7 @@ previous_dates = current_date - timedelta(days=3)
 previous_dates_str = previous_dates.strftime("%Y-%m-%d")
 
 url = "https://us-central1-passion-fbe7a.cloudfunctions.net/dzn54vzyt5ga/events"
-headers = {"Authorization": "gAAAAABlcEioZ8CObY_0cRdtmCdCu9XFkFNs45dpTw3NhQ7ysIwYIn8EEZzpal1uUWdkR0TXgGkY0SXfehCy-4rUZh81Hr3PaZckxyJp3VIcgBzk8qGEpZRMD8_KBJukbtVYkaobYX7jMv4f2TA0kbXkCADTM2yCJw=="}
+headers = {"Authorization": "***"}
 
 events_params = {"date": previous_dates_str}
 
