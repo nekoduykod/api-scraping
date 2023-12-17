@@ -13,7 +13,7 @@ previous_date = current_date - timedelta(days=1)
 previous_date_str = previous_date.strftime("%Y-%m-%d")
 
 url = os.environ.get("API_URL")
-url = url + "/installs"
+url = f"{url}/installs"
 auth_header = os.environ.get("MY_AUTH_HEADER")
 headers = {"Authorization": auth_header}
 installs_params = {"date": previous_date_str}
@@ -69,7 +69,7 @@ with engine.connect() as conn:
 print('Installs data has been loaded to DB')
 
 csv_folder = os.environ.get("CSV_FOLDER")  
-csv_filename = f'{csv_folder}\\{previous_date_str}_installs_data.csv'
+csv_filename = f'{csv_folder}/{previous_date_str}_installs_data.csv'
 with open(csv_filename, 'w', newline='', encoding='utf-8') as csv_file:
     csv_writer = csv.DictWriter(csv_file, fieldnames=records[0].keys())
     csv_writer.writeheader()
