@@ -23,3 +23,5 @@ Daily data extraction from four sources of an API, its cleaning, transforming an
 <img src="/images/04_events_mart.jpg" />
 
 <img src="/images/04_events_data_csv.jpg" />
+------------------------------------------------------------------------------------------
+<img src="/images/task.jpg" />
