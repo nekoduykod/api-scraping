@@ -12,7 +12,7 @@ previous_date = current_date - timedelta(days=1)
 previous_date_str = previous_date.strftime("%Y-%m-%d")
 
 url = os.environ.get("API_URL")
-url = url + "/orders"
+url = f"{url}/orders"
 auth_header = os.environ.get("MY_AUTH_HEADER")
 headers = {"Authorization": auth_header}
 orders_params = {"date": previous_date_str}
@@ -26,7 +26,7 @@ with open(parquet_filename, 'wb') as file:
 print('Data written to parquet')
 
 csv_folder = os.environ.get("CSV_FOLDER") 
-csv_filename = f'{csv_folder}\\{previous_date_str}_orders_data.csv'
+csv_filename = f'{csv_folder}/{previous_date_str}_orders_data.csv'
 df = pd.read_parquet(parquet_filename, engine='fastparquet')
 df.to_csv(csv_filename, index=False)
 print('Orders CSV file created')
