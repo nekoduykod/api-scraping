@@ -13,7 +13,7 @@ previous_date = current_date - timedelta(days=1)
 previous_date_str = previous_date.strftime("%Y-%m-%d")
 
 url = os.environ.get("API_URL")
-url = url + "/events"
+url = f"{url}/events"
 auth_header = os.environ.get("MY_AUTH_HEADER")
 headers = {"Authorization": auth_header}
 events_params = {"date": previous_date_str}
@@ -24,7 +24,7 @@ next_page_index = data.find('"next_page"')
 data = data[:next_page_index]
 
 csv_folder = os.environ.get("CSV_FOLDER")  
-csv_filename = f'{csv_folder}\\{previous_date_str}_events_data.csv'
+csv_filename = f'{csv_folder}/{previous_date_str}_events_data.csv'
 df = pd.read_json(StringIO(data))
 df.to_csv(csv_filename, index=False)
 print('Events written to CSV')
