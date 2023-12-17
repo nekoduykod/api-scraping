@@ -21,14 +21,15 @@ dag = DAG(
 
 scripts_directory = "/scripts"
 
-run_scripts_task = DockerOperator(
-    task_id='run_script_task',
-    image='your_image_name:your_image_tag',  # Вкажи image name і tag  
-    api_version='auto',
-    auto_remove=True,
-    command=["python", f"{scripts_directory}/001_installs_mart.py", "python", f"{scripts_directory}/002_costs_mart.py",\
-             "python", f"{scripts_directory}/003_orders_mart.py", "python", f"{scripts_directory}/004_events_mart.py"],
-    dag=dag,
+tasks = ['installs', 'costs', 'orders', 'events']
+for task in tasks:
+    run_scripts_task = DockerOperator(
+        task_id=f'run_script_{task}',
+        image='your_image_name:your_image_tag',  # Вкажи image name і tag  
+        api_version='auto',
+        auto_remove=True,
+        command=["python", f"{scripts_directory}/001_{task}_mart.py"],
+        dag=dag,
 )
 
 run_scripts_task 
