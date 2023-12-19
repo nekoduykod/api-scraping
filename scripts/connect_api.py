@@ -13,7 +13,8 @@ class APIConnector:
         headers = {"Authorization": self.auth_header}
         response = requests.get(full_url, params=params, headers=headers)
         return response
-    
+        
+    @staticmethod
     def parse_installs(response):
         data = response.replace('\\', '').replace('}]"}', '}]').replace('/', '')
         prefix = '{"count":'       
@@ -22,12 +23,14 @@ class APIConnector:
         characters_to_strip = count_end - count_start
         data = data[characters_to_strip:]
         return data
-    
+        
+    @staticmethod
     def parse_costs(response):
         data = response.replace('\t', ',').replace('/home', 'home').replace('/sale', 'sale')\
                         .replace('/signup', 'signup').replace('/new-arrivals', 'new-arrivals').replace('/products', 'products')
         return data
-    
+        
+    @staticmethod
     def parse_events(response):
         data = response.replace('\\', '').replace('{"data":"', '').replace('}}]",', '}}]')
         next_page_index = data.find('"next_page"')
