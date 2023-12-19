@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
-from api_connection import APIConnector
-from csv_utils import create_csv, previous_date_str
+from connect_api import APIConnector
+from files_utils import create_csv, previous_date_str
 from sqlalchemy import create_engine, text
 import json
 import os
@@ -12,8 +12,8 @@ response = api_connector.connect_api('installs', installs_params)
 data = api_connector.parse_installs(response.text)
 
 records = json.loads(data)  
-  # check later if works well
-create_csv(data, "installs", records, to_database=False)
+
+create_csv(records=True, filename_prefix="installs")
 
 db_params = os.environ.get("DB_URL")
 engine = create_engine(db_params)
