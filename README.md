@@ -1,14 +1,14 @@
 ## OVERVIEW
 
-Daily data extraction from four sources of an API, its cleaning, transforming and subsequently loading into data marts. Then, it is possible to build dashboards for assessing marketing effectiveness, focusing on key metrics such as Cost Per Install (CPI), Revenue, and Return on Ad Spend (ROAS)
+Scroll to the bottom to see the task. Daily data extraction from 4 sources of an API, its cleaning, transforming and loading into data marts. Then, it is possible to build dashboards for assessing marketing effectiveness, focusing on CPI, ROAS
 
 <img src="/images/overview_image.jpg" />
 
-## Data Marts ERD (entity-relationship diagram)
+## Data Marts ERD
 
 <img src="/images/data_marts_ERD.jpg" />
 
-## Screenshots of scripts` success below
+## Other screenshots
 
 <img src="/images/01_installs_mart.jpg" />
 
